@@ -2335,7 +2335,6 @@
                 </span>
               ` : `
                 <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px] border border-amber-300">
-                  مجلة محلية (يتوجب الفحص اليدوي)
                 </span>
               `}
               <a href="https://www.google.com/search?q=site:iasj.mohesr.gov.iq+%22${encodeURIComponent(cleanJournalTitle)}%22" target="_blank" 
@@ -2445,7 +2444,7 @@
         } else if (isLocal) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">
-              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> تدقيق محلي مطلوب
+              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>                   اختيار خاطئ ( يجب تغيير صنف المجلة او التاكد من اسم المجلة)
             </span>
           `;
         } else {
@@ -2583,7 +2582,7 @@
           verdictText = 'مجلة موثوقة (IASJ)';
           verdictBadgeStyle = 'color:#065f46;background:#ecfdf5;font-weight:bold;';
         } else if (isLocal) {
-          verdictText = 'تدقيق محلي مطلوب';
+          verdictText = 'اختيار خاطئ ( يجب تغيير صنف المجلة او التاكد من اسم المجلة)';
           verdictBadgeStyle = 'color:#92400e;background:#fef3c7;font-weight:bold;';
         } else {
           verdictText = 'وقائع مؤتمر';
