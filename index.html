@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://api.elsevier.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.physplan.com https://*.workers.dev https://script.google.com https://script.googleusercontent.com https://api.elsevier.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>منظومة تدقيق رصانة البحوث | جامعة الكوفة</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -833,7 +833,7 @@
       <p class="text-xs text-slate-600 mb-4 leading-relaxed">
       </p>
       <div class="space-y-3 mb-6">
-        <label class="block text-xs font-bold text-slate-700"> </label>
+        <label class="block text-xs font-bold text-slate-700"> (Web App URL):</label>
         <input type="url" id="setting-script-url" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-primary-500 outline-none">
         <p class="text-[11px] text-slate-400">    .</p>
       </div>
@@ -861,8 +861,8 @@
       currentReportId: "",
       scriptUrl: (function() {
         const stored = localStorage.getItem('uok_script_url');
-        const defaultUrl = "https://script.google.com/macros/s/AKfycbz0Ey7ZwHCIGJzdtaBCdOJd2QIg49vUQ3eZOdg7leoGcTHVNRgsk-f45pJ2gM6Inii_/exec";
-        if (!stored || stored.indexOf("AKfycbz0Ey7ZwHCIGJzdtaBCdOJd2QIg49vUQ3eZOdg7leoGcTHVNRgsk-f45pJ2gM6Inii_") !== -1) {
+        const defaultUrl = "https://uok-research-integrity-api.uok-physplan.workers.dev";
+        if (!stored || stored.indexOf("script.google.com") !== -1) {
           localStorage.setItem('uok_script_url', defaultUrl);
           return defaultUrl;
         }
