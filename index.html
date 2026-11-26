@@ -4123,12 +4123,12 @@
       if (!grid) return;
       const list = Array.isArray(departments) && departments.length > 0 ? departments : ['القسم العام'];
       const themes = [
-        { border: 'hover:border-primary-500', bg: 'bg-sky-50 text-sky-600 peer-checked:bg-primary-600', text: 'peer-checked:text-primary-700', check: 'text-primary-600', icon: 'fa-building-columns' },
-        { border: 'hover:border-emerald-500', bg: 'bg-emerald-50 text-emerald-600 peer-checked:bg-emerald-600', text: 'peer-checked:text-emerald-700', check: 'text-emerald-600', icon: 'fa-layer-group' },
-        { border: 'hover:border-amber-500', bg: 'bg-amber-50 text-amber-600 peer-checked:bg-amber-600', text: 'peer-checked:text-amber-700', check: 'text-amber-600', icon: 'fa-graduation-cap' },
-        { border: 'hover:border-violet-500', bg: 'bg-violet-50 text-violet-600 peer-checked:bg-violet-600', text: 'peer-checked:text-violet-700', check: 'text-violet-600', icon: 'fa-book-open' },
-        { border: 'hover:border-teal-500', bg: 'bg-teal-50 text-teal-600 peer-checked:bg-teal-600', text: 'peer-checked:text-teal-700', check: 'text-teal-600', icon: 'fa-flask' },
-        { border: 'hover:border-rose-500', bg: 'bg-rose-50 text-rose-600 peer-checked:bg-rose-600', text: 'peer-checked:text-rose-700', check: 'text-rose-600', icon: 'fa-microscope' }
+        { border: 'hover:border-primary-500', bg: 'bg-sky-50 text-sky-600 peer-checked:bg-primary-600', text: 'peer-checked:text-primary-700', check: 'text-primary-600' },
+        { border: 'hover:border-emerald-500', bg: 'bg-emerald-50 text-emerald-600 peer-checked:bg-emerald-600', text: 'peer-checked:text-emerald-700', check: 'text-emerald-600' },
+        { border: 'hover:border-amber-500', bg: 'bg-amber-50 text-amber-600 peer-checked:bg-amber-600', text: 'peer-checked:text-amber-700', check: 'text-amber-600' },
+        { border: 'hover:border-violet-500', bg: 'bg-violet-50 text-violet-600 peer-checked:bg-violet-600', text: 'peer-checked:text-violet-700', check: 'text-violet-600' },
+        { border: 'hover:border-teal-500', bg: 'bg-teal-50 text-teal-600 peer-checked:bg-teal-600', text: 'peer-checked:text-teal-700', check: 'text-teal-600' },
+        { border: 'hover:border-rose-500', bg: 'bg-rose-50 text-rose-600 peer-checked:bg-rose-600', text: 'peer-checked:text-rose-700', check: 'text-rose-600' }
       ];
 
       grid.innerHTML = list.map((dept, idx) => {
@@ -4139,7 +4139,7 @@
           <label class="relative flex flex-col p-5 rounded-2xl border-2 border-slate-200 ${t.border} bg-white cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md group">
             <input type="radio" name="dept_selection" value="${safeDept}" class="peer sr-only" ${checkedAttr}>
             <div class="w-12 h-12 rounded-xl ${t.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition peer-checked:text-white">
-              <i class="fa-solid ${t.icon} text-xl"></i>
+              <i class="fa-solid fa-layer-group text-xl"></i>
             </div>
             <span class="font-bold text-slate-800 text-base mb-1 ${t.text}">${safeDept}</span>
             <span class="text-xs text-slate-500">${escapeHtml(appState.college ? appState.college.name : '')}</span>
