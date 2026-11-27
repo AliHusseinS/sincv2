@@ -2113,16 +2113,17 @@
       const n = items.length;
       if (n === 0) return [[]];
 
-      if (n <= 9) {
+      // 6 بحوث أو أقل تتسع مع التواقيع في صفحة واحدة بدون انقسام
+      if (n <= 6) {
         return [items];
       }
 
       let P = 2;
-      while ((P - 1) * 12 + 8 < n) {
+      while ((P - 1) * 10 + 5 < n) {
         P++;
       }
 
-      let targetLast = Math.min(8, Math.max(5, Math.floor(n / P)));
+      let targetLast = Math.min(5, Math.max(2, Math.floor(n / P)));
       let remaining = n - targetLast;
       let normalPages = P - 1;
 
@@ -2135,9 +2136,9 @@
       }
       pageSizes.push(targetLast);
 
-      while (pageSizes[pageSizes.length - 1] > 8 || pageSizes[0] > 13) {
+      while (pageSizes[pageSizes.length - 1] > 5 || pageSizes[0] > 10) {
         P++;
-        targetLast = Math.min(8, Math.max(5, Math.floor(n / P)));
+        targetLast = Math.min(5, Math.max(2, Math.floor(n / P)));
         remaining = n - targetLast;
         normalPages = P - 1;
         baseNormal = Math.floor(remaining / normalPages);
@@ -3540,7 +3541,7 @@
       });
       const predatoryCount = predatoryItems.length;
 
-      const rowsHtml = items.map((item, idx) => {
+      const rowHtmlList = items.map((item, idx) => {
         const isLocal = (item.journalCategory || '').includes('محلية');
         const isArab = (item.journalCategory || '').includes('عربية');
         const isIntl = (item.journalCategory || '').includes('عالمية');
@@ -3638,7 +3639,30 @@
             </td>
           </tr>
         `;
-      }).join('');
+      });
+
+      // تقسيم صفوف الفحص بحيث تحتوي الصفحة الأخيرة دائماً على بحثين على الأقل مع التواقيع (أو بحث واحد إذا كان الإجمالي 1)
+      const inspectPages = (function(allRows) {
+        const n = allRows.length;
+        if (n <= 5) return [allRows];
+        if (n === 6) return [allRows.slice(0, 4), allRows.slice(4)];
+        let P = 2;
+        while ((P - 1) * 6 + 4 < n) P++;
+        const targetLast = Math.min(4, Math.max(2, Math.floor(n / P)));
+        const remaining = n - targetLast;
+        const normalPages = P - 1;
+        const baseNormal = Math.floor(remaining / normalPages);
+        const extra = remaining % normalPages;
+        const pages = [];
+        let cursor = 0;
+        for (let i = 0; i < normalPages; i++) {
+          const sz = baseNormal + (i < extra ? 1 : 0);
+          pages.push(allRows.slice(cursor, cursor + sz));
+          cursor += sz;
+        }
+        pages.push(allRows.slice(cursor));
+        return pages;
+      })(rowHtmlList);
 
       const members = appState.committeeMembers || [];
       let signaturesHtml = '';
@@ -3797,7 +3821,13 @@
     <button onclick="window.close()" style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.4);padding:6px 14px;">إغلاق</button>
   </div>
 
-  <div class="page-container">
+  ${inspectPages.map((pageRows, pageIdx) => {
+    const isFirst = pageIdx === 0;
+    const isLast = pageIdx === inspectPages.length - 1;
+    const pageNum = pageIdx + 1;
+    const totalInspectPages = inspectPages.length;
+    return `
+  <div class="page-container" style="${!isLast ? 'page-break-after:always;break-after:page;' : ''}">
     <table class="header-table">
       <tr>
         <td style="width:36%;vertical-align:middle;text-align:right;">
@@ -3806,12 +3836,13 @@
             <div>
               <div style="font-size:13px;font-weight:800;color:#0f172a;">جامعة الكوفة</div>
               <div style="font-size:12px;font-weight:700;color:#059669;">${escapeHtml(appState.college ? appState.college.name : 'جامعة الكوفة')}</div>
-              <div style="font-size:11px;color:#475569;">لجنة تدقيق رصانة البحوث </div>
+              <div style="font-size:11px;color:#475569;">لجنة تدقيق الرصانة </div>
             </div>
           </div>
         </td>
         <td style="width:34%;text-align:center;vertical-align:middle;">
           <h1 style="font-size:16px;font-weight:900;color:#0f172a;margin-bottom:0;">نتائج الفحص</h1>
+          ${totalInspectPages > 1 ? `<div style="font-size:10px;color:#64748b;margin-top:2px;">صفحة ${pageNum} من ${totalInspectPages}</div>` : ''}
         </td>
         <td style="width:33%;vertical-align:middle;text-align:left;">
           <div style="font-size:11px;color:#64748b;">رقم المحضر: <strong style="color:#0369a1;font-family:monospace;font-size:12px;">${escapeHtml(report.reportId)}</strong></div>
@@ -3821,6 +3852,7 @@
       </tr>
     </table>
 
+    ${isFirst ? `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
       <div class="stat-badge" style="background:#f8fafc;">
         <div class="num" style="color:#0f172a;">${total}</div>
@@ -3843,6 +3875,7 @@
         <div class="lbl">مجلات مفترسة</div>
       </div>
     </div>
+    ` : ''}
 
     <table class="data-table">
       <thead>
@@ -3856,17 +3889,18 @@
         </tr>
       </thead>
       <tbody>
-        ${rowsHtml}
+        ${pageRows.join('')}
       </tbody>
     </table>
 
-    ${signaturesHtml}
+    ${isLast ? signaturesHtml : ''}
 
     <div style="margin-top:20px;padding-top:8px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-size:9.5px;color:#94a3b8;">
       <span>منظومة تدقيق رصانة البحوث — ${escapeHtml(appState.college ? appState.college.name : 'جامعة الكوفة')} / جامعة الكوفة</span>
       <span>رقم المحضر: ${escapeHtml(report.reportId)}</span>
     </div>
-  </div>
+  </div>`;
+  }).join('')}
 </body>
 </html>`;
 
