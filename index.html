@@ -1773,8 +1773,8 @@
         if (!journal) {
           Swal.fire({
             icon: 'warning',
-            title: 'يرجى اختيار المجلة من قائمة IASJ',
-            text: 'للبحوث المنشورة في مجلات محلية، يجب اختيار اسم المجلة حصراً من قائمة المجلات العراقية المعتمدة (IASJ).',
+            title: 'يرجى اختيار المجلة من قائمة المجلات المحلية',
+            text: 'للبحوث المنشورة في مجلات محلية، يجب اختيار اسم المجلة حصراً من قائمة المجلات العراقية المعتمدة .',
             confirmButtonText: 'حسناً',
             confirmButtonColor: '#0f172a'
           });
@@ -3271,7 +3271,7 @@
           iasjCellHtml = `
             <div class="text-center">
               <span class="text-slate-500 font-semibold text-[11px] block">${isArab ? 'مجلة عربية' : 'مجلة عالمية'}</span>
-              <span class="text-[10px] text-slate-400">(خارج نطاق IASJ)</span>
+              <span class="text-[10px] text-slate-400">*</span>
             </div>
           `;
         } else if (iasjMatch) {
@@ -3282,7 +3282,7 @@
               </span>
               <a href="${iasjMatch.directUrl}" target="_blank" 
                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-[10px] font-bold transition shadow-2xs"
-                 title="الانتقال المباشر للصفحة الرسمية للمجلة في بوابة وزارة التعليم العالي (IASJ)">
+                 title="الانتقال المباشر للصفحة الرسمية للمجلة في بوابة وزارة التعليم العالي ">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                 <span>الصفحة الرسمية في IASJ</span>
               </a>
@@ -3371,7 +3371,7 @@
         } else {
           predatoryCellHtml = `
             <div class="text-center">
-              <span class="text-slate-400 text-[10px]">مجلة محلية (نطاق IASJ)</span>
+              <span class="text-slate-400 text-[10px]">مجلة محلية </span>
             </div>
           `;
         }
@@ -3387,25 +3387,25 @@
         } else if (isArab) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-300">
-              <i class="fa-solid fa-earth-africa text-teal-600"></i> منشور في مجلات عربية
+              <i class="fa-solid fa-earth-africa text-teal-600"></i> منشور في مجلة عربية
             </span>
           `;
         } else if (isIntl) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-sky-50 text-sky-800 border border-sky-300">
-              <i class="fa-solid fa-globe text-sky-600"></i> منشور في مجلات عالمية
+              <i class="fa-solid fa-globe text-sky-600"></i> منشور في مجلة عالمية
             </span>
           `;
         } else if (iasjMatch || hasIasjLink) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300">
-              <i class="fa-solid fa-circle-check text-emerald-600"></i> مجلة موثوقة (IASJ)
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> مجلة موثوقة  ضمن المجلات المحلية
             </span>
           `;
         } else if (isLocal) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">
-              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> تدقيق محلي مطلوب
+              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> التدقيق مطلوب !  
             </span>
           `;
         } else {
@@ -3529,42 +3529,42 @@
           iasjText = isArab ? 'مجلة عربية' : 'مجلة عالمية';
           iasjBadgeStyle = isArab ? 'color:#0f766e;background:#f0fdfa;' : 'color:#0284c7;background:#f0f9ff;';
         } else if (iasjMatch) {
-          iasjText = `معتمدة في IASJ (#${iasjMatch.journal.id})`;
+          iasjText = `مجلة محلية معتمدة  (#${iasjMatch.journal.id})`;
           iasjBadgeStyle = 'color:#065f46;background:#ecfdf5;font-weight:bold;';
         } else if (isLocal || hasIasjLink) {
-          iasjText = 'مجلة محلية (فهرس الوزارة)';
+          iasjText = 'مجلة محلية ';
           iasjBadgeStyle = 'color:#92400e;background:#fffbeb;';
         }
 
-        let predatoryText = 'غير مدرجة بالقوائم';
+        let predatoryText = 'مجلة معتمدة';
         let predatoryBadgeStyle = 'color:#065f46;background:#ecfdf5;';
         if (predatoryCheck && predatoryCheck.isPredatory) {
           predatoryText = `⚠️ مفترسة: ${predatoryCheck.sourceName || ''}`;
           predatoryBadgeStyle = 'color:#991b1b;background:#fef2f2;font-weight:bold;';
         } else if (isIntl || isArab) {
-          predatoryText = 'غير مدرجة بالقوائم';
+          predatoryText = 'مجلة معتمدة';
           predatoryBadgeStyle = 'color:#065f46;background:#ecfdf5;';
         } else {
-          predatoryText = 'نطاق المجلات المحلية';
+          predatoryText = 'ضمن المجلات المحلية';
           predatoryBadgeStyle = 'color:#64748b;background:#f8fafc;';
         }
 
-        let verdictText = 'منشور في مجلات عالمية';
+        let verdictText = 'منشور في مجلة عالمية';
         let verdictBadgeStyle = 'color:#075985;background:#f0f9ff;font-weight:bold;';
         if (predatoryCheck && predatoryCheck.isPredatory) {
           verdictText = 'تحذير: مجلة غير رصينة';
           verdictBadgeStyle = 'color:#991b1b;background:#fee2e2;font-weight:bold;';
         } else if (isArab) {
-          verdictText = 'منشور في مجلات عربية';
+          verdictText = 'منشور في مجلة عربية';
           verdictBadgeStyle = 'color:#0f766e;background:#f0fdfa;font-weight:bold;';
         } else if (isIntl) {
-          verdictText = 'منشور في مجلات عالمية';
+          verdictText = 'منشور في مجلة عالمية';
           verdictBadgeStyle = 'color:#075985;background:#f0f9ff;font-weight:bold;';
         } else if (iasjMatch || hasIasjLink) {
-          verdictText = 'مجلة موثوقة (IASJ)';
+          verdictText = 'مجلة موثوقة ';
           verdictBadgeStyle = 'color:#065f46;background:#ecfdf5;font-weight:bold;';
         } else if (isLocal) {
-          verdictText = 'تدقيق محلي مطلوب';
+          verdictText = 'يوجد خطأ في المدخلات يجب التحقق!';
           verdictBadgeStyle = 'color:#92400e;background:#fef3c7;font-weight:bold;';
         } else {
           verdictText = 'وقائع مؤتمر';
@@ -3805,7 +3805,7 @@
       </div>
       <div class="stat-badge" style="background:#ecfdf5;border-color:#a7f3d0;">
         <div class="num" style="color:#065f46;">${localCount}</div>
-        <div class="lbl">مجلات محلية (IASJ)</div>
+        <div class="lbl">مجلات محلية </div>
       </div>
       <div class="stat-badge" style="background:#f0fdfa;border-color:#99f6e4;">
         <div class="num" style="color:#0f766e;">${arabCount}</div>
