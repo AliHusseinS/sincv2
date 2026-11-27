@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.physplan.com https://*.workers.dev https://script.google.com https://script.googleusercontent.com https://api.elsevier.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.physplan.com https://*.workers.dev https://script.google.com https://*.googleusercontent.com https://api.elsevier.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>منظومة تدقيق رصانة البحوث | جامعة الكوفة</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1793,6 +1793,27 @@
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
+      }
+
+      if (journalCategory !== "مجلة محلية" && typeof checkPredatoryStatus === 'function') {
+        const predCheck = checkPredatoryStatus(journal);
+        if (predCheck && predCheck.isPredatory) {
+          const warnRes = await Swal.fire({
+            icon: 'warning',
+            title: '⚠️ تحذير: مجلة أو دار نشر مفترسة!',
+            html: `<div style="direction:rtl;text-align:right;font-size:13px;line-height:1.7;">
+              تم العثور على <strong>${escapeHtml(predCheck.name)}</strong> ضمن:<br>
+              <span style="color:#be123c;font-weight:bold;">${escapeHtml(predCheck.sourceName)}</span><br><br>
+              هل ترغب في المتابعة وإضافة هذا البحث إلى الجدول رغم التحذير؟
+            </div>`,
+            showCancelButton: true,
+            confirmButtonText: 'نعم، إضافة رغم التحذير',
+            cancelButtonText: 'إلغاء ومراجعة المجلة',
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#0f172a'
+          });
+          if (!warnRes.isConfirmed) return;
+        }
       }
 
       const seq = appState.researchList.length + 1;
