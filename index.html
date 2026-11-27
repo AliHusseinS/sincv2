@@ -1558,7 +1558,7 @@
     }
 
     async function fetchScopusCoverage(journalTitle, journalCategory) {
-      if (journalCategory && journalCategory !== "مجلة عالمية") {
+      if (journalCategory && journalCategory !== "مجلة عالمية" && journalCategory !== "مؤتمر عالمي") {
         return {
           status: journalCategory,
           years: "غير مشمول بالفحص",
@@ -1832,7 +1832,7 @@
       const link = document.getElementById("input-link").value.trim();
 
       let scopusData = { status: journalCategory, years: 'غير مشمول بالفحص', isCovered: false, notApplicable: true };
-      if (journalCategory === "مجلة عالمية") {
+      if (journalCategory === "مجلة عالمية" || journalCategory === "مؤتمر عالمي") {
         try {
           scopusData = await fetchScopusCoverage(journal, journalCategory);
         } catch (scopusErr) {
@@ -1981,7 +1981,7 @@
           <td class="py-3 px-3 text-center text-slate-600">${escapeHtml(item.authorOrder)}</td>
           <td class="py-3 px-3 text-center text-slate-600 font-mono">${formatPublishDate(item.publishDate)}</td>
           <td class="py-3 px-3 text-center">
-            ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية') ? `
+            ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية' && item.journalCategory !== 'مؤتمر عالمي') ? `
               <div class="inline-flex flex-col items-center justify-center">
                 <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300">
                   <i class="fa-solid fa-circle-minus text-slate-400 text-[10px]"></i>
@@ -2194,7 +2194,7 @@
           <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;">${escapeHtml(item.authorOrder)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-family:monospace;">${formatPublishDate(item.publishDate)}</td>
           <td style="border:1px solid #cbd5e1;padding:5px 3px;text-align:center;">
-            ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية') ? `
+            ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية' && item.journalCategory !== 'مؤتمر عالمي') ? `
               <div style="font-weight:700;font-size:10px;color:#475569;margin-bottom:2px;">
                 ${escapeHtml(item.journalCategory)}
               </div>
@@ -2308,7 +2308,7 @@
 
       for (let i = 0; i < (targetItems || []).length; i++) {
         const it = targetItems[i];
-        if (it.journalCategory !== "مجلة عالمية") {
+        if (it.journalCategory !== "مجلة عالمية" && it.journalCategory !== "مؤتمر عالمي") {
           it.scopusStatus = it.journalCategory || "غير مشمولة";
           it.scopusYears = "غير مشمول بالفحص";
           it.isScopusCovered = false;
@@ -3260,7 +3260,7 @@
 
       for (let i = 0; i < items.length; i++) {
         const it = items[i];
-        if (it.journalCategory !== "مجلة عالمية") {
+        if (it.journalCategory !== "مجلة عالمية" && it.journalCategory !== "مؤتمر عالمي") {
           it.scopusStatus = it.journalCategory || "غير مشمولة";
           it.scopusYears = "غير مشمول بالفحص";
           it.isScopusCovered = false;
@@ -3464,7 +3464,7 @@
               </div>
             </td>
             <td class="py-3 px-3 text-center">
-              ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية') ? `
+              ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية' && item.journalCategory !== 'مؤتمر عالمي') ? `
                 <div class="flex flex-col items-center justify-center">
                   <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-300">
                     <i class="fa-solid fa-circle-minus text-slate-400 text-[10px]"></i>
@@ -3625,7 +3625,7 @@
               </div>
             </td>
             <td style="border:1px solid #cbd5e1;padding:6px 4px;text-align:center;vertical-align:middle;font-size:10.5px;">
-              ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية') ? `
+              ${(item.journalCategory && item.journalCategory !== 'مجلة عالمية' && item.journalCategory !== 'مؤتمر عالمي') ? `
                 <div style="font-weight:700;font-size:10px;color:#475569;margin-bottom:2px;">
                   ${escapeHtml(item.journalCategory)}
                 </div>
