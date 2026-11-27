@@ -3286,6 +3286,8 @@
         const isLocal = (item.journalCategory || '').includes('محلية');
         const isArab = (item.journalCategory || '').includes('عربية');
         const isIntl = (item.journalCategory || '').includes('عالمية');
+        const isIntlConf = (item.journalCategory || '').includes('مؤتمر عالمي');
+        const isLocalConf = (item.journalCategory || '').includes('مؤتمر محلي');
         const hasIasjLink = item.link && (item.link.includes('iasj.mohesr.gov.iq') || item.link.includes('iasj.net'));
         const iasjMatch = (!isIntl && !isArab || hasIasjLink) && (typeof findIasjJournal === 'function') ? findIasjJournal(item.journal) : null;
         const predatoryCheck = (typeof checkPredatoryStatus === 'function') ? checkPredatoryStatus(item.journal) : null;
@@ -3545,6 +3547,8 @@
         const isLocal = (item.journalCategory || '').includes('محلية');
         const isArab = (item.journalCategory || '').includes('عربية');
         const isIntl = (item.journalCategory || '').includes('عالمية');
+        const isIntlConf = (item.journalCategory || '').includes('مؤتمر عالمي');
+        const isLocalConf = (item.journalCategory || '').includes('مؤتمر محلي');
         const hasIasjLink = item.link && (item.link.includes('iasj.mohesr.gov.iq') || item.link.includes('iasj.net'));
         const iasjMatch = (!isIntl && !isArab || hasIasjLink) && (typeof findIasjJournal === 'function') ? findIasjJournal(item.journal) : null;
         const predatoryCheck = (typeof checkPredatoryStatus === 'function') ? checkPredatoryStatus(item.journal) : null;
@@ -3571,6 +3575,12 @@
         } else if (isIntl || isArab) {
           predatoryText = 'مجلة معتمدة';
           predatoryBadgeStyle = 'color:#065f46;background:#ecfdf5;';
+        } else if (isIntlConf) {
+          predatoryText = 'ضمن المؤتمرات العالمية';
+          predatoryBadgeStyle = 'color:#0369a1;background:#f0f9ff;';
+        } else if (isLocalConf) {
+          predatoryText = 'ضمن المؤتمرات المحلية';
+          predatoryBadgeStyle = 'color:#475569;background:#f1f5f9;';
         } else {
           predatoryText = 'ضمن المجلات المحلية';
           predatoryBadgeStyle = 'color:#64748b;background:#f8fafc;';
