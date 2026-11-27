@@ -307,7 +307,7 @@
             
             <div>
               <label class="block text-xs font-bold text-slate-600 mb-1.5">
-                ت (التسلسل التلقائي)
+                التسلسل
               </label>
               <div class="relative">
                 <input type="text" id="input-seq" readonly value="1" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3.5 py-2.5 text-center font-bold text-slate-700 focus:outline-none cursor-not-allowed">
@@ -350,7 +350,7 @@
               <label class="block text-xs font-bold text-slate-600 mb-1.5">
                 عنوان البحث <span class="text-rose-500">*</span>
               </label>
-              <input type="text" id="input-title" required placeholder="أدخل العنوان الكامل للبحث العلمي..." class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
+              <input type="text" id="input-title" required placeholder="أدخل العنوان الكامل للبحث " class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
             </div>
 
             <div class="md:col-span-2">
@@ -359,13 +359,13 @@
                 <span id="journal-mode-indicator" class="text-[11px] text-slate-400 font-normal"></span>
               </label>
 
-              <input type="text" id="input-journal" required placeholder="اسم المجلة العلمية أو المؤتمر..." class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
+              <input type="text" id="input-journal" required placeholder="اسم المجلة  أو المؤتمر..." class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
               <datalist id="iasj-journals-datalist"></datalist>
 
               <div id="wrapper-journal-select" class="hidden space-y-1.5">
                 <div class="relative">
-                  <input type="text" id="iasj-search-filter" placeholder="🔍 اكتب هنا للبحث السريع في قائمة المجلات العراقية..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition">
-                  <span id="iasj-filter-count" class="absolute left-3 top-2 text-[10px] text-slate-400 font-mono">506 مجلة</span>
+                  <input type="text" id="iasj-search-filter" placeholder="🔍  ابحث في قائمة المجلات العراقية..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition">
+                  <span id="iasj-filter-count" class="absolute left-3 top-2 text-[10px] text-slate-400 font-mono"></span>
                 </div>
                 <select id="input-journal-select" class="w-full bg-white border border-emerald-400 rounded-xl px-3.5 py-2.5 text-slate-800 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition shadow-xs">
                   <option value="" disabled selected>-- اختر المجلة من قائمة المجلات العراقية  --</option>
@@ -628,9 +628,9 @@
                     <th class="py-3.5 px-3 border-b border-slate-800 min-w-[160px]">اسم المجلة وتصنيفها</th>
                     <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[145px]">Scopus coverage</th>
                     <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[150px]">بوابة المجلات العراقية </th>
-                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[180px]">فحص المجلات ودور النشر المفترسة</th>
-                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[150px]">رابط المجلة</th>
-                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[130px]">محركات البحث (Scholar)</th>
+                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[180px]">فحص المجلة ودار النشر المفترسة</th>
+                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[150px]">رابط البحث</th>
+                    <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[130px]">فهرسة محركات البحث  </th>
                     <th class="py-3.5 px-3 border-b border-slate-800 text-center min-w-[110px]">الملاحظات</th>
                   </tr>
                 </thead>
@@ -646,7 +646,7 @@
       <div class="mt-6 p-4 bg-white border border-slate-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-shield-halved text-emerald-600"></i>
-          <span id="checker-college-footer">جامعة الكوفة - منظومة تدقيق الرصانة</span>
+          <span id="checker-college-footer">جامعة الكوفة - منظومة تدقيق رصانة البحوث</span>
         </div>
         <div>
           <button onclick="closeResearchCheckerModal()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition">
@@ -666,10 +666,10 @@
         <i class="fa-solid fa-check"></i>
       </div>
       
-      <h3 class="text-xl font-bold text-slate-900 mb-2">تم تصدير المحضر بنجاح</h3>
+      <h3 class="text-xl font-bold text-slate-900 mb-2">تم تصدير المحضر !</h3>
       
       <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-900 text-sm font-semibold mb-5 leading-relaxed">
-        تم حفظ بيانات المحضر وتجهيز نسخة الـ PDF للطباعة والتنزيل لقسم <span id="modal-dept-label" class="underline font-bold"></span>
+         تم حفظ  المحضر  الخاص بـ <span id="modal-dept-label" class="underline font-bold"></span>
       </div>
 
       <!-- معرف المحضر (ID) -->
@@ -686,11 +686,11 @@
       <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 flex-wrap">
         <button id="btn-download-pdf-direct" onclick="downloadCurrentPDF()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs sm:text-sm font-bold transition">
           <i class="fa-solid fa-file-pdf text-rose-400"></i>
-          <span>تنزيل المحضر PDF</span>
+          <span> حقظ ملف المحضر </span>
         </button>
         <button id="btn-download-inspection-pdf-direct" onclick="downloadCurrentInspectionPDF()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition">
           <i class="fa-solid fa-microscope"></i>
-          <span>تنزيل فحص المحضر PDF</span>
+          <span>حفظ ملف الفحص </span>
         </button>
         <button onclick="closeSuccessModal()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition">
           إغلاق
@@ -852,7 +852,7 @@
       <p class="text-xs text-slate-600 mb-4 leading-relaxed">
       </p>
       <div class="space-y-3 mb-6">
-        <label class="block text-xs font-bold text-slate-700"> (Web App URL):</label>
+        <label class="block text-xs font-bold text-slate-700"> ():</label>
         <input type="url" id="setting-script-url" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-primary-500 outline-none">
         <p class="text-[11px] text-slate-400">    .</p>
       </div>
@@ -1181,21 +1181,21 @@
             </td>
             <td class="py-3 px-3 text-center">
               <div class="flex items-center justify-center gap-1.5 flex-wrap">
-                <button onclick="loadReportForEditing('${escapeHtml(rec.reportId)}')" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition active:scale-95" title="تعديل هذا المحضر في الاستمارة وجدول البحوث">
+                <button onclick="loadReportForEditing('${escapeHtml(rec.reportId)}')" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition active:scale-95" title="تعديل  المحضر  ">
                   <i class="fa-solid fa-pen-to-square text-[10px]"></i>
                   <span>تعديل</span>
                 </button>
 
-                <button onclick="quickReExportReport('${escapeHtml(rec.reportId)}')" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition active:scale-95" title="إعادة تصدير المحضر بصيغة PDF مباشرة">
+                <button onclick="quickReExportReport('${escapeHtml(rec.reportId)}')" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition active:scale-95" title="إعادة تصدير المحضر   ">
                   <i class="fa-solid fa-file-pdf text-[10px]"></i>
                   <span>إعادة تصدير</span>
                 </button>
 
-                <button onclick="openPdfPrintWindow('${escapeHtml(rec.reportId)}')" class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition" title="طباعة أو تنزيل ملف PDF">
+                <button onclick="openPdfPrintWindow('${escapeHtml(rec.reportId)}')" class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition" title="طباعة   ">
                   <i class="fa-solid fa-print"></i>
                 </button>
 
-                <button onclick="openResearchCheckerFromReports('${escapeHtml(rec.reportId)}')" class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-700 text-xs font-bold border border-teal-200 transition" title="فحص رصانة المجلات">
+                <button onclick="openResearchCheckerFromReports('${escapeHtml(rec.reportId)}')" class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-700 text-xs font-bold border border-teal-200 transition" title="اضغط هنا لعرض  بيانات الفحص">
                   <i class="fa-solid fa-microscope"></i>
                 </button>
               </div>
@@ -1743,7 +1743,7 @@
           selectElem.removeAttribute("required");
         }
         if (modeIndicator) {
-          modeIndicator.innerHTML = '<span class="text-slate-400">كتابة حرة</span>';
+          modeIndicator.innerHTML = '<span class="text-slate-400"></span>';
         }
         if (textInput && textInput.value) {
           const pred = (typeof checkPredatoryStatus === 'function') ? checkPredatoryStatus(textInput.value.trim()) : null;
@@ -2586,7 +2586,7 @@
         academicYear: "2025-2026",
         researchCount: items.length,
         authors: authors,
-        status: (existingIdx >= 0) ? "تم التعديل وإعادة التصدير" : "تم التصدير",
+        status: (existingIdx >= 0) ? "تم التعديل وإعادة التصدير" : "محضر مصدر",
         items: items
       };
 
