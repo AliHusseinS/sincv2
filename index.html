@@ -3408,7 +3408,7 @@
         if (predatoryCheck && predatoryCheck.isPredatory) {
           verdictBadge = `
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-300 animate-pulse">
-              <i class="fa-solid fa-ban text-rose-600"></i> تحذير: مجلة غير رصينة
+              <i class="fa-solid fa-ban text-rose-600"></i> مجلة مرفوضة
             </span>
           `;
         } else if (isArab) {
@@ -3579,7 +3579,7 @@
         let verdictText = 'منشور في مجلة عالمية';
         let verdictBadgeStyle = 'color:#075985;background:#f0f9ff;font-weight:bold;';
         if (predatoryCheck && predatoryCheck.isPredatory) {
-          verdictText = 'تحذير: مجلة غير رصينة';
+          verdictText = 'مجلة مرفوضة';
           verdictBadgeStyle = 'color:#991b1b;background:#fee2e2;font-weight:bold;';
         } else if (isArab) {
           verdictText = 'منشور في مجلة عربية';
