@@ -2173,18 +2173,22 @@
       return `https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(url)}`;
     }
 
-    function buildPrintTableForChunk(chunkItems) {
+    function buildPrintTableForChunk(chunkItems, startIdx = 0) {
       if (!chunkItems || chunkItems.length === 0) {
         return `<table style="width:100%;font-size:11px;border-collapse:collapse;text-align:center;"><tr><td colspan="11" style="padding:18px;text-align:center;color:#64748b;border:1px solid #cbd5e1;">لا توجد بيانات</td></tr></table>`;
       }
-      const rows = chunkItems.map(item => `
+      const rows = chunkItems.map((item, idx) => {
+        const displaySeq = (item.seq !== undefined && item.seq !== null && item.seq !== '' && !isNaN(item.seq)) ? item.seq : (startIdx + idx + 1);
+        const displayCite = (item.citeScore !== undefined && item.citeScore !== null && String(item.citeScore).trim() !== '') ? String(item.citeScore).trim() : '-';
+        const displayType = (item.researchType !== undefined && item.researchType !== null && String(item.researchType).trim() !== '') ? String(item.researchType).trim() : '-';
+        return `
         <tr>
-          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-weight:700;background:#f8fafc;">${item.seq}</td>
+          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-weight:700;background:#f8fafc;">${escapeHtml(displaySeq)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 7px;text-align:right;font-weight:700;color:#0f172a;">${escapeHtml(item.title)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 7px;text-align:right;color:#334155;">${escapeHtml(item.journal)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 4px;text-align:center;">${escapeHtml(item.journalCategory)}</td>
-          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-weight:700;">${escapeHtml(item.citeScore)}</td>
-          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;">${escapeHtml(item.researchType)}</td>
+          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-weight:700;">${escapeHtml(displayCite)}</td>
+          <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;">${escapeHtml(displayType)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 7px;text-align:right;font-weight:700;color:#0369a1;">${escapeHtml(item.authorName)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;">${escapeHtml(item.authorOrder)}</td>
           <td style="border:1px solid #cbd5e1;padding:6px 3px;text-align:center;font-family:monospace;">${formatPublishDate(item.publishDate)}</td>
@@ -2213,7 +2217,7 @@
             ` : '<span style="color:#94a3b8;font-size:10px;">-</span>'}
           </td>
         </tr>
-      `).join('');
+      `; }).join('');
 
       return `
         <table style="width:100%;font-size:11px;border-collapse:collapse;text-align:center;">
@@ -2323,7 +2327,10 @@
       const totalPages = pagedChunks.length;
 
       // توليد صفحات الـ HTML
+      let runningStartIdx = 0;
       const pagesHtml = pagedChunks.map((chunk, pageIndex) => {
+        const chunkStartIdx = runningStartIdx;
+        runningStartIdx += chunk.length;
         const pageNum = pageIndex + 1;
         const isFirst = pageNum === 1;
         const isLast = pageNum === totalPages;
@@ -2358,7 +2365,7 @@
               </div>
             `}
 
-            ${buildPrintTableForChunk(chunk)}
+            ${buildPrintTableForChunk(chunk, chunkStartIdx)}
 
             ${isLast ? membersHtml : ''}
           </div>
