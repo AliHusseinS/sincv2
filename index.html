@@ -1831,7 +1831,7 @@
       const publishDate = document.getElementById("input-publish-date").value;
       const link = document.getElementById("input-link").value.trim();
 
-      let scopusData = { status: journalCategory, years: 'غير مشمولة بالفحص', isCovered: false, notApplicable: true };
+      let scopusData = { status: journalCategory, years: 'غير مشمول بالفحص', isCovered: false, notApplicable: true };
       if (journalCategory === "مجلة عالمية") {
         try {
           scopusData = await fetchScopusCoverage(journal, journalCategory);
@@ -1988,7 +1988,7 @@
                   ${escapeHtml(item.journalCategory)}
                 </span>
                 <span class="text-[10px] text-slate-400 font-semibold mt-1">
-                  غير مشمولة بالفحص
+                  غير مشمول بالفحص
                 </span>
               </div>
             ` : `
@@ -2194,7 +2194,7 @@
                 ${escapeHtml(item.journalCategory)}
               </div>
               <div style="font-size:8.5px;color:#94a3b8;font-weight:600;">
-                غير مشمولة بالفحص
+                غير مشمول بالفحص
               </div>
             ` : `
               <div style="font-weight:800;font-size:10px;color:${item.isScopusCovered ? '#15803d' : '#b91c1c'};margin-bottom:2px;">
@@ -2305,10 +2305,10 @@
         const it = targetItems[i];
         if (it.journalCategory !== "مجلة عالمية") {
           it.scopusStatus = it.journalCategory || "غير مشمولة";
-          it.scopusYears = "غير مشمولة بالفحص";
+          it.scopusYears = "غير مشمول بالفحص";
           it.isScopusCovered = false;
           it.notApplicable = true;
-        } else if (!it.scopusStatus || !it.scopusYears || it.scopusYears === "غير مشمولة بالفحص") {
+        } else if (!it.scopusStatus || !it.scopusYears || it.scopusYears === "غير مشمول بالفحص") {
           try {
             const sc = await fetchScopusCoverage(it.journal, it.journalCategory);
             it.scopusStatus = sc.status;
@@ -3254,10 +3254,10 @@
         const it = items[i];
         if (it.journalCategory !== "مجلة عالمية") {
           it.scopusStatus = it.journalCategory || "غير مشمولة";
-          it.scopusYears = "غير مشمولة بالفحص";
+          it.scopusYears = "غير مشمول بالفحص";
           it.isScopusCovered = false;
           it.notApplicable = true;
-        } else if (!it.scopusStatus || !it.scopusYears || it.scopusYears === "غير مشمولة بالفحص") {
+        } else if (!it.scopusStatus || !it.scopusYears || it.scopusYears === "غير مشمول بالفحص") {
           try {
             const sc = await fetchScopusCoverage(it.journal, it.journalCategory);
             it.scopusStatus = sc.status;
@@ -3461,7 +3461,7 @@
                     ${escapeHtml(item.journalCategory)}
                   </span>
                   <span class="text-[10px] text-slate-400 font-semibold mt-1">
-                    غير مشمولة بالفحص
+                    غير مشمول بالفحص
                   </span>
                 </div>
               ` : `
@@ -3612,7 +3612,7 @@
                   ${escapeHtml(item.journalCategory)}
                 </div>
                 <div style="font-size:8.5px;color:#94a3b8;font-weight:600;">
-                  غير مشمولة بالفحص
+                  غير مشمول بالفحص
                 </div>
               ` : `
                 <div style="font-weight:800;font-size:10px;color:${item.isScopusCovered ? '#15803d' : '#b91c1c'};margin-bottom:2px;">
